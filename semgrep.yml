@@ -1,11 +1,10 @@
 name: Semgrep Scan
 
 on:
+  workflow_dispatch:  # allows manual trigger from GitHub UI
   push:
     branches: [main]
   pull_request:
-  schedule:
-    - cron: '0 0 * * 1'  # optional: runs every Monday
 
 jobs:
   semgrep:
@@ -17,4 +16,5 @@ jobs:
         with:
           config: "p/ci"  # use "auto" or your custom ruleset
         env:
-          SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}  # optional for dashboard/reporting
+          SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}  # optional
+
